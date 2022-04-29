@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-
+//Selection of options available to the user
 void showMenu(){
     cout <<"********MENU********" << endl;
     cout <<"1. Check balance" << endl;
@@ -11,15 +11,33 @@ void showMenu(){
     cout <<"********************" << endl;
 }
 
+//display balance on screen
+void showBalance(double& balance){
+    cout << "balance is:" <<balance<< " $" << endl;
+}
 
+//add amount to balance
+void deposit(double& balance){
+    cout << "deposit amount:";
+    double depositAmount;
+    cin >> depositAmount;
+    balance += depositAmount;
+}
 
-
+//remove amount from balance
+void withdraw(double& balance){
+    cout << "withdraw amount:";
+    double withdrawAmount;
+    cin >> withdrawAmount;
+    if(withdrawAmount<=balance)
+        balance -= withdrawAmount;
+    else
+        cout << "not enough money" << endl;
+}
 
 int main(){
-    //check balance, deposit, withdraw, show menu
     int option;
     double balance = 500;
-
     
     do{
     showMenu();
@@ -27,22 +45,12 @@ int main(){
     cin >> option;
     system("clear");
     switch(option){
-        case 1: cout << "balance is:" <<balance<< " $" << endl; break;
-        case 2: cout << "deposit amount:";
-            double depositAmount;
-            cin >> depositAmount;
-            balance += depositAmount;
-            break;
-        case 3: cout << "withdraw amount:";
-            double withdrawAmount;
-            cin >> withdrawAmount;
-            if(withdrawAmount<=balance)
-                balance -= withdrawAmount;
-            else
-                cout << "not enough money";
-            break;
+        case 1: showBalance(balance); break;
+        case 2: deposit(balance); break;
+        case 3: withdraw(balance); break;
+        default: cout << "illegal value, please chose from menu" << endl;
     }
     }while(option!=4);
 
-    // system("pause>0");
+    return 0;
 }
